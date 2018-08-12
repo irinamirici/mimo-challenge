@@ -1,0 +1,226 @@
+{
+  "users": [
+    {
+      "username": "mimouser",
+      "password": "hashedpwd",
+      "role": 0
+    },
+    {
+      "username": "contentcreator",
+      "password": "hashedpwd",
+      "role": 1
+    }
+  ],
+  "achievements": [
+    {
+      "name": "Complete 5 lessons",
+      "type": 0,
+      "target": 5
+    },
+    {
+      "name": "Complete 25 lessons",
+      "type": 0,
+      "target": 25
+    },
+    {
+      "name": "Complete 50 lessons",
+      "type": 0,
+      "target": 50
+    },
+    {
+      "name": "Complete 1 chapter",
+      "type": 1,
+      "target": 1
+    },
+    {
+      "name": "Complete 5 chapters",
+      "type": 1,
+      "target": 5
+    },
+    {
+      "name": "Complete the {0} course",
+      "type": 2,
+      "target": 1
+    }
+  ],
+
+  "courses": [
+    {
+      "name": "Swift",
+      "description": "Swift course for beginners",
+      "isPublished": true,
+      "chapters": [
+        {
+          "name": "Swift Introduction",
+          "description": "Swift is a new programming language for iOS",
+          "order": 1,
+          "lessons": [
+            {
+              "name": "What is Swift",
+              "description": "dummy lesson 1 description",
+              "content": "dummy lesson 1 content",
+              "order": 1
+            },
+            {
+              "name": "Simple Values",
+              "description": "dummy lesson 2 description",
+              "content": "dummy lesson 2 content",
+              "order": 2
+            },
+            {
+              "name": "Control Flow",
+              "description": "dummy lesson 3 description",
+              "content": "dummy lesson 3 content",
+              "order": 3
+            }
+          ]
+        },
+        {
+          "name": "Language Guide",
+          "description": "Swift provides its own versions of all fundamental C and Objective-C types",
+          "order": 2,
+          "lessons": [
+            {
+              "name": "Constants and Variables",
+              "description": "dummy lesson 1 description",
+              "content": "dummy lesson 1 description",
+              "order": 1
+            },
+            {
+              "name": "Type Annotations",
+              "description": "dummy lesson 2 description",
+              "content": "dummy lesson 2 content",
+              "order": 2
+            },
+            {
+              "name": "Printing Constants and Variables",
+              "description": "dummy lesson 3 description",
+              "content": "dummy lesson 3 content",
+              "order": 3
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "name": "C#",
+      "description": "C# course for beginners",
+      "isPublished": true,
+      "chapters": [
+        {
+          "name": "C# Introduction",
+          "description": "Key Topics",
+          "order": 1,
+          "lessons": [
+            {
+              "name": "Data types",
+              "description": "dummy lesson 1 description",
+              "content": "dummy lesson 1 content",
+              "order": 1
+            },
+            {
+              "name": "Strings",
+              "description": "dummy lesson 2 description",
+              "content": "dummy lesson 2 content",
+              "order": 2
+            },
+            {
+              "name": "Namespaces",
+              "description": "dummy lesson 3 description",
+              "content": "dummy lesson 3 content",
+              "order": 3
+            },
+            {
+              "name": "Collections",
+              "description": "dummy lesson 4 description",
+              "content": "dummy lesson 4 content",
+              "order": 4
+            }
+          ]
+        },
+        {
+          "name": "OOP",
+          "description": "OOP topics",
+          "order": 2,
+          "lessons": [
+            {
+              "name": "Basics of object oriented programming",
+              "description": "dummy lesson 1 description",
+              "content": "dummy lesson 1 description",
+              "order": 1
+            },
+            {
+              "name": "Encapsulation",
+              "description": "dummy lesson 2 description",
+              "content": "dummy lesson 2 content",
+              "order": 2
+            },
+            {
+              "name": "Inheritance",
+              "description": "dummy lesson 3 description",
+              "content": "dummy lesson 3 content",
+              "order": 3
+            },
+            {
+              "name": "Polymorphism",
+              "description": "dummy lesson 4 description",
+              "content": "dummy lesson 4 content",
+              "order": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Javascript",
+      "description": "Javascript course for beginners",
+      "isPublished": true,
+      "chapters": [
+        {
+          "name": "Javascript Introduction",
+          "description": "Key Topics",
+          "order": 1,
+          "lessons": [
+            {
+              "name": "Literals",
+              "description": "dummy lesson 1 description",
+              "content": "dummy lesson 1 content",
+              "order": 1
+            },
+            {
+              "name": "Variables",
+              "description": "dummy lesson 2 description",
+              "content": "dummy lesson 2 content",
+              "order": 2
+            },
+            {
+              "name": "Operators",
+              "description": "dummy lesson 3 description",
+              "content": "dummy lesson 3 content",
+              "order": 3
+            },
+            {
+              "name": "Expressions",
+              "description": "dummy lesson 4 description",
+              "content": "dummy lesson 4 content",
+              "order": 4
+            },
+            {
+              "name": "Keywords",
+              "description": "dummy lesson 5 description",
+              "content": "dummy lesson 5 content",
+              "order": 5
+            },
+            {
+              "name": "Comments",
+              "description": "dummy lesson 6 description",
+              "content": "dummy lesson 6 content",
+              "order": 6
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
