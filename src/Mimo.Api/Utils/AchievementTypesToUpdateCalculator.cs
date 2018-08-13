@@ -20,7 +20,6 @@ namespace Mimo.Api.Utils
             if (UserHasCompletedAllLessonsForCurrentCourse(userCompletedLessons, currentCourse))
             {
                 achievementTypesToUpdate.CourseCompleted = true;
-                achievementTypesToUpdate.CourseId = currentCourse.Id;
             }
             return achievementTypesToUpdate;
         }

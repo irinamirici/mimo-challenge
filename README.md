@@ -29,3 +29,13 @@ GET endpoints work for both user types.
 Open TestExplorer and run the tests.
 IntegrationTests use a TestServer, which applies test migrations, and creates a separate test db in 
 test\Mimo.Api.IntegrationTests\bin\Debug\netcoreapp2.1
+
+# Adding a migration
+Open Package Manager Console
+Select src\Mimo.Persistence as Default project from the above dropdown
+cd src\Mimo.Persistence
+dotnet ef migrations add MyMigration -s ..\Mimo.Api
+
+You can apply migrations with 
+dotnet ef database update -s ..\Mimo.Api
+but its not necessary. They will be applied when application or tests start.

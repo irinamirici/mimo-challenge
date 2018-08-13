@@ -58,9 +58,6 @@ namespace Mimo.Persistence.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.ToTable("Chapters");
                 });
 
@@ -111,9 +108,6 @@ namespace Mimo.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ChapterId");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
 
                     b.ToTable("Lessons");
                 });

@@ -13,6 +13,8 @@
             public const string Empty = "EMPTY_FIELD";
             public const string InvalidLength = "INVALID_LENGTH";
             public const string Duplicate = "DUPLICATE";
+            public const string DateMustBeInThePast = "DATE_MUST_BE_IN_THE_PAST";
+            public const string EndTimeMustBeGreaterThenStartTime= "END_TIME_MUST_BE_GREATER_THEN_START_TIME";
         }
     }
 }

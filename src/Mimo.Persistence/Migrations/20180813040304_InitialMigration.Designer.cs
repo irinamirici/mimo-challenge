@@ -9,8 +9,8 @@ using Mimo.Persistence.DbContexts;
 namespace Mimo.Persistence.Migrations
 {
     [DbContext(typeof(MimoDbContext))]
-    [Migration("20180812201439_InitialSeed")]
-    partial class InitialSeed
+    [Migration("20180813040304_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,9 +59,6 @@ namespace Mimo.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
 
                     b.ToTable("Chapters");
                 });
@@ -113,9 +110,6 @@ namespace Mimo.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ChapterId");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
 
                     b.ToTable("Lessons");
                 });

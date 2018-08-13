@@ -170,12 +170,6 @@ namespace Mimo.Persistence.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Chapters_Name",
-                table: "Chapters",
-                column: "Name",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Courses_Name",
                 table: "Courses",
                 column: "Name",
@@ -185,12 +179,6 @@ namespace Mimo.Persistence.Migrations
                 name: "IX_Lessons_ChapterId",
                 table: "Lessons",
                 column: "ChapterId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Lessons_Name",
-                table: "Lessons",
-                column: "Name",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserAchievement_AchievementId",

@@ -37,13 +37,11 @@ namespace Mimo.Persistence.DbContexts
             modelBuilder.Entity<Chapter>(entity =>
             {
                 entity.Property(x => x.Name).IsRequired().HasMaxLength(50);
-                entity.HasIndex(x => x.Name).IsUnique();
                 entity.Property(x => x.Description).IsRequired().HasMaxLength(200);
             });
             modelBuilder.Entity<Lesson>(entity =>
             {
                 entity.Property(x => x.Name).IsRequired().HasMaxLength(50);
-                entity.HasIndex(x => x.Name).IsUnique();
                 entity.Property(x => x.Description).IsRequired().HasMaxLength(200);
                 entity.Property(x => x.Content).IsRequired().HasMaxLength(1000);
             });

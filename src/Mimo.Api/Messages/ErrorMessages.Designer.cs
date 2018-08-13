@@ -61,6 +61,15 @@ namespace Mimo.Api.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {PropertyName} must be in the past.
+        /// </summary>
+        public static string BeInThePast {
+            get {
+                return ResourceManager.GetString("BeInThePast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chapter name must be unique for a course.
         /// </summary>
         public static string ChapterNameUnique {
@@ -120,6 +129,15 @@ namespace Mimo.Api.Messages {
         public static string DeleteCourseAlreadyPublished {
             get {
                 return ResourceManager.GetString("DeleteCourseAlreadyPublished", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End time must be greater then start time.
+        /// </summary>
+        public static string EndTimeMustBeGreaterThenStartTime {
+            get {
+                return ResourceManager.GetString("EndTimeMustBeGreaterThenStartTime", resourceCulture);
             }
         }
         

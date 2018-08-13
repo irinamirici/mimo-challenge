@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BeInThePast" xml:space="preserve">
+    <value>{PropertyName} must be in the past</value>
+  </data>
   <data name="ChapterNameUnique" xml:space="preserve">
     <value>Chapter name must be unique for a course</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="DeleteCourseAlreadyPublished" xml:space="preserve">
     <value>Cannot delete course, after a course has been published</value>
+  </data>
+  <data name="EndTimeMustBeGreaterThenStartTime" xml:space="preserve">
+    <value>End time must be greater then start time</value>
   </data>
   <data name="FieldCannotBeEmpty" xml:space="preserve">
     <value>{PropertyName} cannot be empty</value>
