@@ -2,12 +2,16 @@
 
 # Requirements
 Visual Studio 2017 (developed with 15.7.4)
+
 net core 2.1.302
 
 # Running the Api
 Checkout project
+
 Build with Visual Studio
+
 Set Mimo.Api as Startup Project
+
 Start in debug with IIS Express
 
 The project will create a sqlite db named mimoapi.db in src\Mimo.Api (It can be browsed with DB Browser for Sqlite)
@@ -26,26 +30,38 @@ Use: Basic bWltb3VzZXI6aGFzaGVkcHdk
 GET endpoints work for both user types.
 
 Optionally application can be started with 
+
 cd src/Mimo.Api/
+
 dotnet run
+
 It will start on https://localhost:5001. Open https://localhost:5001/swagger in browser and accept self signed certificate
 
 # Running the Tests
 Open TestExplorer and run the tests.
+
 IntegrationTests use a TestServer, which applies test migrations, and creates a separate test db in 
 test\Mimo.Api.IntegrationTests\bin\Debug\netcoreapp2.1
 
 Optionally integration tests can be started with 
+
 cd test\Mimo.Api.IntegrationTests
+
 dotnet test
+
 or unit tests with
+
 cd test\Mimo.Api.UnitTests
+
 dotnet test
 
 # Adding a migration
 Open Package Manager Console
+
 Select src\Mimo.Persistence as Default project from the above dropdown
+
 cd src\Mimo.Persistence
+
 dotnet ef migrations add MyMigration -s ..\Mimo.Api
 
 You can apply migrations with 
