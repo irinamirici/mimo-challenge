@@ -22,9 +22,7 @@ namespace Mimo.Api.IntegrationTests
 
         public HttpMessageHandler Handler { get; }
 
-        public IMimoDbContext DbContext { get; }
-
-        private readonly IServiceProvider services;
+        public IServiceProvider Services;
 
         public TestServerFixture()
         {
@@ -46,9 +44,7 @@ namespace Mimo.Api.IntegrationTests
 
             Handler = Server.CreateHandler();
 
-            services = Server.Host.Services;
-
-            DbContext = GetService<IMimoDbContext>();
+            Services = Server.Host.Services;
         }
 
         public void Dispose()
@@ -57,6 +53,5 @@ namespace Mimo.Api.IntegrationTests
             HttpClient.Dispose();
         }
 
-        protected T GetService<T>() => (T)services.GetService(typeof(T));
     }
 }

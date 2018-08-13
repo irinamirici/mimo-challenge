@@ -1,13 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mimo.Persistence.DbContexts;
+using System;
 
 namespace Mimo.Api.IntegrationTests.Infrastructure
 {
-    public   class IntegrationTestsStartup:Startup
+    public class IntegrationTestsStartup : Startup
     {
-        public IntegrationTestsStartup(IConfiguration configuration) : base( configuration)
+        public IntegrationTestsStartup(IConfiguration configuration) : base(configuration)
         {
         }
 
@@ -19,7 +21,19 @@ namespace Mimo.Api.IntegrationTests.Infrastructure
                 options.UseSqlite("Data Source=mimotest.db",
                     b => b.MigrationsAssembly("Mimo.Persistence"));
             });
-            services.AddScoped<IMimoDbContext, MimoDbContext>();
+            services.AddTransient<IMimoDbContext, MimoDbContext>();
+        }
+
+        protected override void EnsureDbMigrated(IApplicationBuilder app)
+        {
+            try
+            {
+                base.EnsureDbMigrated(app);
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }

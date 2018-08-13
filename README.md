@@ -17,10 +17,10 @@ Migrations are applied automatically at every startup.
 Add /swagger to the base url, and you will get a swagger UI.
 Pick an endpoint and send a request.
 
-Endpoints which manipulate course structure require an Auhtorization header for a ContentCreator user.
+Endpoints which manipulate course structure require an Authorization header for a ContentCreator user.
 Use: Basic Y29udGVudGNyZWF0b3I6aGFzaGVkcHdk
 
-CompleteLesson endpoint requires and Auhtorization header for a Client user.
+CompleteLesson endpoint requires and Authorization header for a Client user.
 Use: Basic bWltb3VzZXI6aGFzaGVkcHdk
 
 GET endpoints work for both user types.
