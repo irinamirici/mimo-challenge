@@ -88,6 +88,15 @@ namespace Mimo.Api.Messages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User doesn&apos;t exist, or it does not have role &apos;Client&apos;.
+        /// </summary>
+        public static string ClientUserNotFound {
+            get {
+                return ResourceManager.GetString("ClientUserNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot complete a lesson for a course which has not been published.
         /// </summary>
         public static string CompleteLessonCourseNotPublished {

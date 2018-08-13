@@ -14,7 +14,7 @@ The project will create a sqlite db named mimoapi.db in src\Mimo.Api (It can be 
 Migrations are applied automatically at every startup.
 2 test users are seeded in db by InitialSeed migration, along with 3 test courses and achievement types.
 
-Add /swagger to the base url, and you will get a swagger UI.
+Open https://localhost:44306/swagger and accept self signed certificate.
 Pick an endpoint and send a request.
 
 Endpoints which manipulate course structure require an Authorization header for a ContentCreator user.
@@ -25,10 +25,22 @@ Use: Basic bWltb3VzZXI6aGFzaGVkcHdk
 
 GET endpoints work for both user types.
 
+Optionally application can be started with 
+cd src/Mimo.Api/
+dotnet run
+It will start on https://localhost:5001. Open https://localhost:5001/swagger in browser and accept self signed certificate
+
 # Running the Tests
 Open TestExplorer and run the tests.
 IntegrationTests use a TestServer, which applies test migrations, and creates a separate test db in 
 test\Mimo.Api.IntegrationTests\bin\Debug\netcoreapp2.1
+
+Optionally integration tests can be started with 
+cd test\Mimo.Api.IntegrationTests
+dotnet test
+or unit tests with
+cd test\Mimo.Api.UnitTests
+dotnet test
 
 # Adding a migration
 Open Package Manager Console

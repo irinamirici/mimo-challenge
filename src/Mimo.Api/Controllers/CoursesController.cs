@@ -27,7 +27,6 @@ namespace Mimo.Api.Controllers
         private readonly ICommandHandler<PublishCourseCommand, bool> publishCourseCommandHandler;
         private readonly IQueryHandler<GetCourseQuery, Course> getCourseQueryHandler;
         private readonly IQueryHandler<GetAllCoursesQuery, List<CourseDto>> getAllCoursesQueryHandler;
-        private readonly IResultValidator<CreateCourseCommand> createCourseValidator;
         private readonly IResponseHandler responseHandler;
 
         public CoursesController(IMapper mapper,
@@ -37,7 +36,6 @@ namespace Mimo.Api.Controllers
             ICommandHandler<PublishCourseCommand, bool> publishCourseCommandHandler,
             IQueryHandler<GetCourseQuery, Course> getCourseQueryHandler,
             IQueryHandler<GetAllCoursesQuery, List<CourseDto>> getAllCoursesQueryHandler,
-            IResultValidator<CreateCourseCommand> createCourseValidator,
             IResponseHandler responseHandler)
         {
             this.mapper = mapper;
@@ -47,7 +45,6 @@ namespace Mimo.Api.Controllers
             this.publishCourseCommandHandler = publishCourseCommandHandler;
             this.getCourseQueryHandler = getCourseQueryHandler;
             this.getAllCoursesQueryHandler = getAllCoursesQueryHandler;
-            this.createCourseValidator = createCourseValidator;
             this.responseHandler = responseHandler;
         }
 
@@ -55,8 +52,7 @@ namespace Mimo.Api.Controllers
         [HttpPost]
         public ActionResult<CourseDto> Create([FromBody]CreateCourseCommand command)
         {
-            return createCourseValidator.Validate(command)
-                 .OnSuccess(() => createCourseCommandHandler.Handle(command))
+            return createCourseCommandHandler.Handle(command)
                      .OnBoth((result) => responseHandler.GetCreatedResponse(result, "GetCourse", new
                      {
                          courseId = result.Value?.Id

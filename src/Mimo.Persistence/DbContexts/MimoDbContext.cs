@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Mimo.Persistence.Entities;
-using System.Threading.Tasks;
 
 namespace Mimo.Persistence.DbContexts
 {
@@ -27,17 +26,29 @@ namespace Mimo.Persistence.DbContexts
             {
                 entity.Property(x => x.Username).IsRequired().HasMaxLength(50);
                 entity.HasIndex(x => x.Username).IsUnique();
+                entity.HasMany(x => x.Achievements)
+                    .WithOne(x => x.User)
+                    .OnDelete(DeleteBehavior.Cascade);
+                entity.HasMany(x => x.CompletedLessons)
+                    .WithOne(x => x.User)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
             modelBuilder.Entity<Course>(entity =>
             {
                 entity.Property(x => x.Name).IsRequired().HasMaxLength(50);
                 entity.HasIndex(x => x.Name).IsUnique();
                 entity.Property(x => x.Description).IsRequired().HasMaxLength(200);
+                entity.HasMany(x => x.Chapters)
+                    .WithOne(x => x.Course)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
             modelBuilder.Entity<Chapter>(entity =>
             {
                 entity.Property(x => x.Name).IsRequired().HasMaxLength(50);
                 entity.Property(x => x.Description).IsRequired().HasMaxLength(200);
+                entity.HasMany(x => x.Lessons)
+                    .WithOne(x => x.Chapter)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
             modelBuilder.Entity<Lesson>(entity =>
             {
@@ -51,11 +62,6 @@ namespace Mimo.Persistence.DbContexts
                 entity.HasIndex(x => x.Name).IsUnique();
             });
             base.OnModelCreating(modelBuilder);
-        }
-
-        public Task<int> SaveChangesAsync()
-        {
-            return base.SaveChangesAsync();
         }
 
         public override int SaveChanges()

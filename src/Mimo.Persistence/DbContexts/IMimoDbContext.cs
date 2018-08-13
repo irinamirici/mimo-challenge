@@ -1,10 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Mimo.Persistence.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mimo.Persistence.DbContexts
 {
@@ -19,8 +15,6 @@ namespace Mimo.Persistence.DbContexts
         DbSet<User> Users { get; }
 
         DbSet<Achievement> Achievements { get; }
-
-         Task<int> SaveChangesAsync();
 
         int SaveChanges();
 

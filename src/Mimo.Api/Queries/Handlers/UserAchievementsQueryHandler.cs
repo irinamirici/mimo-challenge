@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Mimo.Api.Dtos;
+using Mimo.Api.Messages;
 using Mimo.Persistence.DbContexts;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,13 @@ namespace Mimo.Api.Queries.Handlers
 
         public Result<List<UserAchievementDto>> Handle(UserAchievementsQuery query)
         {
+            var userExists = dbContext.Users.Any(x => x.Id == query.UserId && x.Role == Persistence.Entities.UserRole.Client);
+            if(!userExists)
+            {
+                return Result.Fail<List<UserAchievementDto>>(new ResultError(Constants.ErrorCodes.ClientUserNotFound,
+                    ErrorMessages.ClientUserNotFound),
+                System.Net.HttpStatusCode.NotFound);
+            }
             var achievements = dbContext.Users
                 .Include(x => x.Achievements)
                 .ThenInclude(x => x.Course)

@@ -9,8 +9,8 @@ using Mimo.Persistence.DbContexts;
 namespace Mimo.Persistence.Migrations
 {
     [DbContext(typeof(MimoDbContext))]
-    [Migration("20180813040325_InitialSeed")]
-    partial class InitialSeed
+    [Migration("20180813094952_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -193,14 +193,16 @@ namespace Mimo.Persistence.Migrations
                 {
                     b.HasOne("Mimo.Persistence.Entities.Course", "Course")
                         .WithMany("Chapters")
-                        .HasForeignKey("CourseId");
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Mimo.Persistence.Entities.Lesson", b =>
                 {
                     b.HasOne("Mimo.Persistence.Entities.Chapter", "Chapter")
                         .WithMany("Lessons")
-                        .HasForeignKey("ChapterId");
+                        .HasForeignKey("ChapterId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Mimo.Persistence.Entities.UserAchievement", b =>
@@ -215,14 +217,16 @@ namespace Mimo.Persistence.Migrations
 
                     b.HasOne("Mimo.Persistence.Entities.User", "User")
                         .WithMany("Achievements")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Mimo.Persistence.Entities.UserLesson", b =>
                 {
                     b.HasOne("Mimo.Persistence.Entities.User", "User")
                         .WithMany("CompletedLessons")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

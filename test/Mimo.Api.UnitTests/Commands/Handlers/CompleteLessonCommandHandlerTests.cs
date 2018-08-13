@@ -5,6 +5,7 @@ using Mimo.Api.Dtos;
 using Mimo.Api.Messages;
 using Mimo.Api.UnitTests.Builders;
 using Mimo.Api.Utils;
+using Mimo.Api.Validators;
 using Mimo.Persistence.DbContexts;
 using Mimo.Persistence.Entities;
 using Moq;
@@ -21,6 +22,7 @@ namespace Mimo.Api.UnitTests.Commands.Handlers
         private readonly Mock<IMapper> mapperMock;
         private readonly Mock<IUserAchievementsUpdater> updaterMock;
         private readonly Mock<IAchievementTypesToUpdateCalculator> calculatorMock;
+        private readonly Mock<IResultValidator<CompleteLessonCommand>> validatorMock;
 
         private readonly CompleteLessonCommandHandler handler;
         private CompleteLessonCommand command;
@@ -42,10 +44,14 @@ namespace Mimo.Api.UnitTests.Commands.Handlers
             mapperMock = new Mock<IMapper>();
             updaterMock = new Mock<IUserAchievementsUpdater>();
             calculatorMock = new Mock<IAchievementTypesToUpdateCalculator>();
+            validatorMock = new Mock<IResultValidator<CompleteLessonCommand>>();
+            validatorMock.Setup(x => x.Validate(It.IsAny<CompleteLessonCommand>()))
+                .Returns(Result.Ok());
             handler = new CompleteLessonCommandHandler(dbContextMock.Object,
                 mapperMock.Object,
                 updaterMock.Object,
-                calculatorMock.Object);
+                calculatorMock.Object,
+                validatorMock.Object);
         }
 
         [Fact]

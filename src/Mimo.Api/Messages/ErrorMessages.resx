@@ -126,6 +126,9 @@
   <data name="ChapterNotFound" xml:space="preserve">
     <value>Chapter not found</value>
   </data>
+  <data name="ClientUserNotFound" xml:space="preserve">
+    <value>User doesn't exist, or it does not have role 'Client'</value>
+  </data>
   <data name="CompleteLessonCourseNotPublished" xml:space="preserve">
     <value>Cannot complete a lesson for a course which has not been published</value>
   </data>

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Mimo.Api.Dtos;
 using Mimo.Api.Messages;
 using Mimo.Api.Utils;
+using Mimo.Api.Validators;
 using Mimo.Persistence.DbContexts;
 using Mimo.Persistence.Entities;
 using System;
@@ -17,20 +18,28 @@ namespace Mimo.Api.Commands.Handlers
         private readonly IMapper mapper;
         private readonly IUserAchievementsUpdater userAchievementsUpdater;
         private readonly IAchievementTypesToUpdateCalculator achievementTypesCalculator;
+        private readonly IResultValidator<CompleteLessonCommand> completeLessonValidator;
 
         public CompleteLessonCommandHandler(IMimoDbContext dbContext,
             IMapper mapper,
             IUserAchievementsUpdater userAchievementsUpdater,
-            IAchievementTypesToUpdateCalculator achievementTypesCalculator)
+            IAchievementTypesToUpdateCalculator achievementTypesCalculator,
+            IResultValidator<CompleteLessonCommand> completeLessonValidator)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
             this.userAchievementsUpdater = userAchievementsUpdater;
             this.achievementTypesCalculator = achievementTypesCalculator;
+            this.completeLessonValidator = completeLessonValidator;
         }
 
         public Result<List<UserAchievementDto>> Handle(CompleteLessonCommand command)
         {
+            var validationResult = completeLessonValidator.Validate(command);
+            if (validationResult.Failure)
+            {
+                return Result.Fail<List<UserAchievementDto>>(validationResult.Errors);
+            }
             var user = dbContext.Users.Include(x => x.CompletedLessons)
                 .First(x => x.Username == command.Username);
             var completedLesson = user.CompletedLessons.FirstOrDefault(x => x.LessonId == command.LessonId);

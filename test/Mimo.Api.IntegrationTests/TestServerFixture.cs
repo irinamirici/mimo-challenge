@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Mimo.Api.IntegrationTests.Infrastructure;
-using Mimo.Persistence.DbContexts;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
-using Xunit;
 
 namespace Mimo.Api.IntegrationTests
 {
@@ -51,6 +49,7 @@ namespace Mimo.Api.IntegrationTests
         {
             Server.Dispose();
             HttpClient.Dispose();
+            ContentCreatorHttpClient.Dispose();
         }
 
     }

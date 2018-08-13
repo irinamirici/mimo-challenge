@@ -9,7 +9,6 @@ using Mimo.Api.Infrastructure;
 using Mimo.Api.Infrastructure.Extensions;
 using Mimo.Api.Queries;
 using Mimo.Api.Queries.Handlers;
-using Mimo.Api.Validators;
 using Mimo.Persistence.Entities;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +25,6 @@ namespace Mimo.Api.Controllers
         private readonly ICommandHandler<CreateLessonCommand, LessonDto> createLessonHandler;
         private readonly ICommandHandler<UpdateLessonCommand, LessonDto> updateLessonHandler;
         private readonly ICommandHandler<DeleteLessonCommand, bool> deleteLessonHandler;
-        private readonly IResultValidator<CompleteLessonCommand> completeLessonValidator;
 
         private readonly IQueryHandler<GetLessonQuery, Lesson> getLessonQueryHandler;
         private readonly IQueryHandler<GetChapterQuery, Chapter> getChapterQueryHandler;
@@ -38,7 +36,6 @@ namespace Mimo.Api.Controllers
             ICommandHandler<CreateLessonCommand, LessonDto> createLessonHandler,
             ICommandHandler<UpdateLessonCommand, LessonDto> updateLessonHandler,
             ICommandHandler<DeleteLessonCommand, bool> deleteLessonHandler,
-            IResultValidator<CompleteLessonCommand> completeLessonValidator,
             IQueryHandler<GetLessonQuery, Lesson> getLessonQueryHandler,
             IQueryHandler<GetChapterQuery, Chapter> getChapterQueryHandler,
             IResponseHandler responseHandler,
@@ -49,7 +46,6 @@ namespace Mimo.Api.Controllers
             this.createLessonHandler = createLessonHandler;
             this.updateLessonHandler = updateLessonHandler;
             this.deleteLessonHandler = deleteLessonHandler;
-            this.completeLessonValidator = completeLessonValidator;
             this.getLessonQueryHandler = getLessonQueryHandler;
             this.getChapterQueryHandler = getChapterQueryHandler;
             this.responseHandler = responseHandler;
@@ -62,8 +58,7 @@ namespace Mimo.Api.Controllers
         {
             command.LessonId = lessonId;
             command.Username = contextAccesor.HttpContext.User.Identity.Name;
-            return completeLessonValidator.Validate(command)
-                .OnSuccess(() => completeLessonHandler.Handle(command))
+            return  completeLessonHandler.Handle(command)
                 .OnBoth((result) => responseHandler.GetResponse(result));
         }
 

@@ -14,15 +14,15 @@ namespace Mimo.Api.IntegrationTests.Scenarios
 {
     public class CompleteLessonScenarios : AbstractScenario
     {
-        private List<int> usersToDelete;
+        private List<string> usersToDelete;
 
         public CompleteLessonScenarios(TestServerFixture testServerFixture) : base(testServerFixture)
         {
-            usersToDelete = new List<int>();
+            usersToDelete = new List<string>();
         }
 
         [Fact]
-        public async Task UserGetsComplete5LessonsAchievementAsync()
+        public async Task UserObtainsComplete5LessonsAchievementAsync()
         {
             //arrange
             var username = Guid.NewGuid().ToString();
@@ -50,6 +50,69 @@ namespace Mimo.Api.IntegrationTests.Scenarios
             Assert.True(completedAchievement.CompletedOn > beforeCompletion);
         }
 
+        [Fact]
+        public async Task UserObtainsCompleteChapterAchievementAsync()
+        {
+            //arrange
+            var chapterId = 2;
+            var username = Guid.NewGuid().ToString();
+            var user = AddUser(username);
+            var client = GetHttpClientWithUserAuthorization(user);
+            var completedLesson = new CompleteLessonCommand
+            {
+                StartTime = DateTime.UtcNow.AddHours(-2),
+                EndTime = DateTime.UtcNow.AddHours(-1)
+            };
+            var beforeCompletion = DateTime.UtcNow;
+            var lessonIdsForChapter= dbContext.Lessons.Where(x => x.Chapter.Id == chapterId)
+                .Select(x => x.Id).ToList();
+            //act
+            foreach (var lessonId in lessonIdsForChapter)
+            {
+                await client.PostAsJsonAsync($"/api/lessons/{lessonId}/actions/complete", completedLesson);
+            };
+            //assert
+            var db = GetService<IMimoDbContext>();
+            var updatedUser = db.Users.Include(x => x.Achievements).First(x => x.Username == username);
+            var completedAchievement = updatedUser.Achievements
+                .Single(x => x.Achievement.Type == AchievementType.CompleteChapter && x.IsCompleted);
+            Assert.Equal(1, completedAchievement.Progress);
+            Assert.True(completedAchievement.IsCompleted);
+            Assert.True(completedAchievement.CompletedOn > beforeCompletion);
+        }
+
+        [Fact]
+        public async Task UserObtainsCompleteCourseAchievementAsync()
+        {
+            //arrange
+            var courseId = 2;
+            var username = Guid.NewGuid().ToString();
+            var user = AddUser(username);
+            var client = GetHttpClientWithUserAuthorization(user);
+            var completedLesson = new CompleteLessonCommand
+            {
+                StartTime = DateTime.UtcNow.AddHours(-2),
+                EndTime = DateTime.UtcNow.AddHours(-1)
+            };
+            var beforeCompletion = DateTime.UtcNow;
+            var lessonIdsForCourse = dbContext.Lessons.Where(x => x.Chapter.Course.Id == courseId)
+                .Select(x => x.Id).ToList();
+            //act
+            foreach (var lessonId in lessonIdsForCourse)
+            {
+                await client.PostAsJsonAsync($"/api/lessons/{lessonId}/actions/complete", completedLesson);
+            };
+            //assert
+            var db = GetService<IMimoDbContext>();
+            var updatedUser = db.Users.Include(x => x.Achievements).First(x => x.Username == username);
+            var completedAchievement = updatedUser.Achievements
+                .Single(x => x.Achievement.Type == AchievementType.CompleteCourse);
+            Assert.Equal(1, completedAchievement.Progress);
+            Assert.Equal(courseId, completedAchievement.Course.Id);
+            Assert.True(completedAchievement.IsCompleted);
+            Assert.True(completedAchievement.CompletedOn > beforeCompletion);
+        }
+
         private User AddUser(string username)
         {
             var availableAchievements = dbContext.Achievements
@@ -69,7 +132,7 @@ namespace Mimo.Api.IntegrationTests.Scenarios
             };
             dbContext.Users.Add(user);
             dbContext.SaveChanges();
-            usersToDelete.Add(user.Id);
+            usersToDelete.Add(user.Username);
             return user;
         }
 
@@ -80,6 +143,14 @@ namespace Mimo.Api.IntegrationTests.Scenarios
             client.DefaultRequestHeaders.Add("Authorization", $"Basic {encoded}");
 
             return client;
+        }
+
+        public override void Dispose()
+        {
+            var db = base.GetService<IMimoDbContext>();
+            db.Users.RemoveRange(dbContext.Users.Where(x => usersToDelete.Contains(x.Username)));
+            db.SaveChanges();
+            base.Dispose();
         }
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Mimo.Persistence.DbContexts;
 using System;
+using System.Threading;
 
 namespace Mimo.Api.IntegrationTests.Infrastructure
 {
@@ -32,7 +33,7 @@ namespace Mimo.Api.IntegrationTests.Infrastructure
             }
             catch (Exception)
             {
-
+                Thread.Sleep(1000);
             }
         }
     }

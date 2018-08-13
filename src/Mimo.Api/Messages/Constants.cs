@@ -7,6 +7,7 @@
             public const string CourseNotFound = "COURSE_NOT_FOUND";
             public const string ChapterNotFound = "CHAPTER_NOT_FOUND";
             public const string LessonNotFound = "LESSON_NOT_FOUND";
+            public const string ClientUserNotFound = "CLIENT_USER_NOT_FOUND";
             public const string CourseAlreadyPublished = "COURSE_ALREADY_PUBLISHED";
             public const string CourseNotPublished = "COURSE_NOT_PUBLISHED";
             public const string BadFormat = "BAD_FORMAT";

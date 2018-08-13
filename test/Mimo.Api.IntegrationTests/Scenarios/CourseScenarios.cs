@@ -2,6 +2,7 @@
 using Mimo.Api.Dtos;
 using Mimo.Api.IntegrationTests.Infrastructure;
 using Mimo.Api.Messages;
+using Mimo.Persistence.DbContexts;
 using Mimo.Persistence.Entities;
 using Newtonsoft.Json;
 using System;
@@ -98,8 +99,9 @@ namespace Mimo.Api.IntegrationTests.Scenarios
 
         public override void Dispose()
         {
-            dbContext.Courses.RemoveRange(dbContext.Courses.Where(x => coursesToDelete.Contains(x.Name)));
-            dbContext.SaveChanges();
+            var db = base.GetService<IMimoDbContext>();
+            db.Courses.RemoveRange(dbContext.Courses.Where(x => coursesToDelete.Contains(x.Name)));
+            db.SaveChanges();
             base.Dispose();
         }
     }

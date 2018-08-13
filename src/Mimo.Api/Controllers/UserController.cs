@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Mimo.Api.Dtos;
 using Mimo.Api.Infrastructure;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 
 namespace Mimo.Api.Controllers
 {
+    [Authorize]
     [Route("api/users")]
     [ApiController]
     public class UserController : ControllerBase
