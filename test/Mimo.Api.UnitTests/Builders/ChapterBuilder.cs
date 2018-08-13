@@ -20,6 +20,18 @@ namespace Mimo.Api.UnitTests.Builders
             return this;
         }
 
+        public ChapterBuilder WithCourse(Course course)
+        {
+            ObjectToBuild.Course = course;
+            return this;
+        }
+
+        public ChapterBuilder WithUnpblishedCourse()
+        {
+            ObjectToBuild.Course = new CourseBuilder().Unpublished().Build();
+            return this;
+        }
+
         public ChapterBuilder WithLessonsWithIds(List<int> lessonIds)
         {
             lessonIds.ForEach(x =>
