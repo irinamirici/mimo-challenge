@@ -16,7 +16,7 @@ namespace Mimo.Api.Queries.Handlers
         public Result<bool> Handle(LessonNameIsUniqueQuery query)
         {
             var isUnique = false == dbContext.Lessons
-                   .Any(x => x.Name == query.LessonName && x.Chapter.Id == query.ChapterId && x.Id != query.LessonId);
+                   .Any(x => x.Name.ToLower() == query.LessonName.ToLower() && x.Chapter.Id == query.ChapterId && x.Id != query.LessonId);
             return (isUnique)
                  ? Result.Ok(isUnique)
                  : Result.Fail<bool>(new ResultError(Constants.ErrorCodes.Duplicate,
