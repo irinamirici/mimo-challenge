@@ -30,11 +30,11 @@ Use: **Basic bWltb3VzZXI6aGFzaGVkcHdk**
 GET endpoints work for both user types.
 
 Optionally application can be started with 
-'''
+```
 cd src/Mimo.Api/
 
 dotnet run
-'''
+```
 It will start on https://localhost:5001. Open https://localhost:5001/swagger in browser and accept self signed certificate
 
 # Running the Tests
@@ -44,28 +44,28 @@ IntegrationTests use a TestServer to run the API and apply test migrations. A se
 test\Mimo.Api.IntegrationTests\bin\Debug\netcoreapp2.1
 
 Optionally integration tests can be started with 
-'''
+```
 cd test\Mimo.Api.IntegrationTests
 
 dotnet test
-'''
+```
 or unit tests with
-'''
+```
 cd test\Mimo.Api.UnitTests
 
 dotnet test
-'''
+```
 # Adding a migration
 Open Package Manager Console
 
 Select src\Mimo.Persistence as Default project from the above dropdown
-'''
+```
 cd src\Mimo.Persistence
 
 dotnet ef migrations add MyMigration -s ..\Mimo.Api
-'''
+```
 You can apply migrations with 
-'''
+```
 dotnet ef database update -s ..\Mimo.Api
-'''
+```
 but it is not necessary. They will be applied when application or tests start.
