@@ -1,7 +1,7 @@
 # mimo-challenge
 
 # Requirements
-Visual Studio 2017 (developed with 15.7.4)
+Visual Studio 2019 (developed with 15.7.4)
 
 net core 2.1.302
 
